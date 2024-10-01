@@ -11,7 +11,7 @@ public class HumanResourcesClient
 	private Dictionary<Endpoint, string> _endpoints;
 
     public Companies Companies { get; private set; }
-
+    public Departmens Departmens { get; private set; }
     public HumanResourcesClient(string domain)
     {
         _domain = domain;
@@ -28,5 +28,6 @@ public class HumanResourcesClient
         };
 
         Companies = new Companies(_domain, _genericHttpMethods, _endpoints);
+        Departmens = new Departmens(_domain, _genericHttpMethods, _endpoints);
     }
 }
