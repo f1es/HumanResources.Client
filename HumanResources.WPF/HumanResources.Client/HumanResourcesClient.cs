@@ -12,6 +12,9 @@ public class HumanResourcesClient
 
     public Companies Companies { get; private set; }
     public Departmens Departmens { get; private set; }
+    public Vacancies Vacancies { get; private set; }
+    public Professions Professions { get; private set; }
+    public Workers Workers { get; private set; }
     public HumanResourcesClient(string domain)
     {
         _domain = domain;
@@ -37,5 +40,8 @@ public class HumanResourcesClient
 
         Companies = new Companies(_domain, _genericHttpMethods, _endpoints);
         Departmens = new Departmens(_domain, _genericHttpMethods, _endpoints);
+        Vacancies = new Vacancies(_domain, _genericHttpMethods, _endpoints);
+        Professions = new Professions(_domain, _genericHttpMethods, _endpoints);
+        Workers = new Workers(_domain, _genericHttpMethods, _endpoints);
     }
 }
