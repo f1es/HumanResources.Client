@@ -12,11 +12,19 @@ var serializerOptions = new JsonSerializerOptions()
 var compResponse = await hrClient.Companies.GetAllAsync();
 Console.WriteLine(JsonSerializer.Serialize(compResponse, serializerOptions));
 
-var compId = Guid.Parse(Console.ReadLine());
-var depResponse = await hrClient.Departmens.GetAllAsync(compId);
+var companyId = Guid.Parse(Console.ReadLine());
+var depResponse = await hrClient.Departmens.GetAllAsync(companyId);
 Console.WriteLine(JsonSerializer.Serialize(depResponse, serializerOptions));
 
-var id = Guid.Parse(Console.ReadLine());
-var depResp = await hrClient.Departmens.GetByIdAsync(compId, id);
-Console.WriteLine(JsonSerializer.Serialize(depResp, serializerOptions));
+var vacancies = await hrClient.Vacancies.GetAllAsync(companyId);
+Console.WriteLine(JsonSerializer.Serialize(vacancies, serializerOptions));
+
+var departmentId = Guid.Parse(Console.ReadLine());
+var workers = await hrClient.Workers.GetAllAsync(companyId, departmentId);
+Console.WriteLine(JsonSerializer.Serialize(workers, serializerOptions));
+
+var professions = await hrClient.Professions.GetAllAsync();
+Console.WriteLine(JsonSerializer.Serialize(professions, serializerOptions));
+
+
 
