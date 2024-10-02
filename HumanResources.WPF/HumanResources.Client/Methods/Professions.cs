@@ -6,16 +6,16 @@ namespace HumanResources.Client.Methods;
 
 public class Professions
 {
-	private string _domain;
+	private string _url;
 	private GenericHttpMethods _genericHttpMethods;
 	private Dictionary<Endpoint, string> _endpoints;
 
 	public Professions(
-		string domain,
+		string url,
 		GenericHttpMethods genericHttpMethods,
 		Dictionary<Endpoint, string> endpoints)
 	{
-		_domain = domain;
+		_url = url;
 		_genericHttpMethods = genericHttpMethods;
 		_endpoints = endpoints;
 	}
@@ -51,7 +51,7 @@ public class Professions
 	}
 
 	private string GetUri(Endpoint endpoint) =>
-		$"{_domain}{_endpoints[endpoint]}";
+		$"{_url}{_endpoints[endpoint]}";
 
 	private string GetUriWithId(Endpoint endpoint, Guid id, string idExpression = "{id}") =>
 		GetUri(endpoint)
