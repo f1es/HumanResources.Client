@@ -25,7 +25,15 @@ public class HumanResourcesClient
             { Endpoint.departments, "/api/companies/{companyId}/departments" },
             { Endpoint.departmentsWithId, "/api/companies/{companyId}/departments/{id}" },
 
-        };
+            { Endpoint.vacancies, "/api/companies/{companyId}/vacancies" },
+            { Endpoint.vacanciesWithId, "/api/companies/{companyId}/vacancies/{id}" },
+
+            { Endpoint.professions, "/api/professions" },
+            { Endpoint.professionsWithId, "/api/professions/{id}" },
+
+			{ Endpoint.workers, "/api/companies/{companyId}/departments/{departmentId}/workers" },
+			{ Endpoint.workersWithId, "/api/companies/{companyId}/departments/{departmentId}/workers/{id}" },
+		};
 
         Companies = new Companies(_domain, _genericHttpMethods, _endpoints);
         Departmens = new Departmens(_domain, _genericHttpMethods, _endpoints);
