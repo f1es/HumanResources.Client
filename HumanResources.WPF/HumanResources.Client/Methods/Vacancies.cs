@@ -53,6 +53,13 @@ public class Vacancies
 		await _genericHttpMethods.PutAsync(uri, vacancyDto);
 	}
 
+	public async Task<ProfessionResponseDto> GetProfessionAsync(Guid companyId, Guid id)
+	{
+		var uri = GetUriWithId(Endpoint.vacanciesProfession, companyId, id);
+		var response = await _genericHttpMethods.GetAsync<ProfessionResponseDto>(uri);
+		return response;
+	}
+
 	private string GetUri(
 		Endpoint endpoint, 
 		Guid companyId, 

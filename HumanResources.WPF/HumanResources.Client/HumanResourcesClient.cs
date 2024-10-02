@@ -30,6 +30,7 @@ public class HumanResourcesClient
 
             { Endpoint.vacancies, "/api/companies/{companyId}/vacancies" },
             { Endpoint.vacanciesWithId, "/api/companies/{companyId}/vacancies/{id}" },
+            { Endpoint.vacanciesProfession, "/api/companies/{companyId}/vacancies/{id}/profession" },
 
             { Endpoint.professions, "/api/professions" },
             { Endpoint.professionsWithId, "/api/professions/{id}" },
