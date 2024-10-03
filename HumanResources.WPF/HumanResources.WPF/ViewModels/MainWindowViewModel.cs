@@ -20,7 +20,8 @@ public class MainWindowViewModel : ObservableObject
 
 	public async Task<IEnumerable<CompanyResponseDto>> GetCompanies()
 	{
-		var companies = await _humanResourcesClient.Companies.GetAllAsync();
-		return companies;
+		throw new NotImplementedException();
+		//var companies = await _humanResourcesClient.Companies.GetAllAsync();
+		//return companies;
 	}
 }
