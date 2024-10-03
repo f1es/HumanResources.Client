@@ -17,7 +17,7 @@ public class ParametersBuilder
 			}
 		}
 
-		propertyBuilder = propertyBuilder.Remove(propertyBuilder.Length, 1);
+		propertyBuilder = propertyBuilder.Remove(propertyBuilder.Length - 1, 1);
 
 		return propertyBuilder.ToString();
 	}
