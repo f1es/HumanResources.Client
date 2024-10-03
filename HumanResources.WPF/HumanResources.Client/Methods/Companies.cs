@@ -5,7 +5,7 @@ using HumanResources.Client.Shared.Parameters;
 
 namespace HumanResources.Client.Methods;
 
-public class Companies
+public class Companies : BaseMethods
 {
     private string _url;
     private GenericHttpMethods _genericHttpMethods;
@@ -15,8 +15,7 @@ public class Companies
     public Companies(
         string url,
 		GenericHttpMethods genericHttpMethods,
-        Dictionary<Endpoint, string> endpoints
-        )
+        Dictionary<Endpoint, string> endpoints)
     {
         _url = url;
         _genericHttpMethods = genericHttpMethods;
@@ -26,7 +25,7 @@ public class Companies
 
     public async Task<IEnumerable<CompanyResponseDto>> GetAllAsync(CompanyRequestParameters parameters) =>
         await _genericHttpMethods
-        .GetAsync<IEnumerable<CompanyResponseDto>>(GetUriWithParameters(Endpoint.companies, parameters));
+        .GetAsync<IEnumerable<CompanyResponseDto>>(AddParametersToUri(GetUri(Endpoint.companies), parameters));
 
     public async Task<CompanyResponseDto> GetByIdAsync(Guid id)
     {
@@ -56,11 +55,4 @@ public class Companies
 
     private string GetUriWithId(Endpoint endpoint, Guid id, string idExpression = "{id}") =>
         GetUri(endpoint).Replace(idExpression, id.ToString());
-
-    private string GetUriWithParameters(Endpoint endpoint, CompanyRequestParameters parameters)
-    {
-        var uri = GetUri(endpoint);
-        var parametersString = _parametersBuilder.BuildParameters(parameters);
-        return uri + parametersString;
-    }
 }
