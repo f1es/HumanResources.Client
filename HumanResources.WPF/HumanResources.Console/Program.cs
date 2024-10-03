@@ -14,25 +14,15 @@ var companyParameters = new CompanyRequestParameters()
 {
 	SearchTerm = "",
 	PageNumber = 1,
-	PageSize = 3
+	PageSize = 4
 };
 
 var compResponse = await hrClient.Companies.GetAllAsync(companyParameters);
 Console.WriteLine(JsonSerializer.Serialize(compResponse, serializerOptions));
 
-//var companyId = Guid.Parse(Console.ReadLine());
-//var depResponse = await hrClient.Departmens.GetAllAsync(companyId);
-//Console.WriteLine(JsonSerializer.Serialize(depResponse, serializerOptions));
-
-//var vacancies = await hrClient.Vacancies.GetAllAsync(companyId);
-//Console.WriteLine(JsonSerializer.Serialize(vacancies, serializerOptions));
-
-//var departmentId = Guid.Parse(Console.ReadLine());
-//var workers = await hrClient.Workers.GetAllAsync(companyId, departmentId);
-//Console.WriteLine(JsonSerializer.Serialize(workers, serializerOptions));
-
-//var professions = await hrClient.Professions.GetAllAsync();
-//Console.WriteLine(JsonSerializer.Serialize(professions, serializerOptions));
-
-
-
+var professionParameters = new ProfessionRequestParameters()
+{
+	SearchTerm = "chel",
+};
+var professions = await hrClient.Professions.GetAllAsync(professionParameters);
+Console.WriteLine(JsonSerializer.Serialize(professions, serializerOptions));
