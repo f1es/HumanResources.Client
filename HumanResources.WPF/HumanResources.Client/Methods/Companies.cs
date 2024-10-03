@@ -1,6 +1,7 @@
 ﻿using HumanResources.Client.Enums;
 using HumanResources.Client.Shared.Dto.Request;
 using HumanResources.Client.Shared.Dto.Response;
+using HumanResources.Client.Shared.Parameters;
 
 namespace HumanResources.Client.Methods;
 
@@ -9,6 +10,7 @@ public class Companies
     private string _url;
     private GenericHttpMethods _genericHttpMethods;
     private Dictionary<Endpoint, string> _endpoints;
+    private ParametersBuilder _parametersBuilder;
 
     public Companies(
         string url,
@@ -19,11 +21,12 @@ public class Companies
         _url = url;
         _genericHttpMethods = genericHttpMethods;
 		_endpoints = endpoints;
+        _parametersBuilder = new ParametersBuilder();
     }
 
-    public async Task<IEnumerable<CompanyResponseDto>> GetAllAsync() =>
+    public async Task<IEnumerable<CompanyResponseDto>> GetAllAsync(CompanyRequestParameters parameters) =>
         await _genericHttpMethods
-        .GetAsync<IEnumerable<CompanyResponseDto>>(GetUri(Endpoint.companies));
+        .GetAsync<IEnumerable<CompanyResponseDto>>(GetUriWithParameters(Endpoint.companies, parameters));
 
     public async Task<CompanyResponseDto> GetByIdAsync(Guid id)
     {
@@ -53,4 +56,11 @@ public class Companies
 
     private string GetUriWithId(Endpoint endpoint, Guid id, string idExpression = "{id}") =>
         GetUri(endpoint).Replace(idExpression, id.ToString());
+
+    private string GetUriWithParameters(Endpoint endpoint, CompanyRequestParameters parameters)
+    {
+        var uri = GetUri(endpoint);
+        var parametersString = _parametersBuilder.BuildParameters(parameters);
+        return uri + parametersString;
+    }
 }
