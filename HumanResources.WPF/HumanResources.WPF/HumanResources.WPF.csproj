@@ -8,4 +8,18 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HumanResources.Client\HumanResources.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FlesLib.WPF">
+      <HintPath>FlesLib.WPF.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.WPF", "HumanResources.WPF\HumanResources.WPF.csproj", "{94477D6B-C9DE-4165-94FB-6CE826EFA1AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.WPF", "HumanResources.WPF\HumanResources.WPF.csproj", "{94477D6B-C9DE-4165-94FB-6CE826EFA1AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Client", "HumanResources.Client\HumanResources.Client.csproj", "{6D7EB7C6-0E74-402A-9834-350037A6936B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Console", "HumanResources.Console\HumanResources.Console.csproj", "{9135F7AF-CF63-441C-A8FF-5B3E0841C42B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{94477D6B-C9DE-4165-94FB-6CE826EFA1AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94477D6B-C9DE-4165-94FB-6CE826EFA1AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94477D6B-C9DE-4165-94FB-6CE826EFA1AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D7EB7C6-0E74-402A-9834-350037A6936B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D7EB7C6-0E74-402A-9834-350037A6936B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D7EB7C6-0E74-402A-9834-350037A6936B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D7EB7C6-0E74-402A-9834-350037A6936B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9135F7AF-CF63-441C-A8FF-5B3E0841C42B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9135F7AF-CF63-441C-A8FF-5B3E0841C42B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9135F7AF-CF63-441C-A8FF-5B3E0841C42B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9135F7AF-CF63-441C-A8FF-5B3E0841C42B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
