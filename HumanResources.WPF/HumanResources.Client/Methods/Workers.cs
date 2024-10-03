@@ -1,11 +1,12 @@
 ﻿using HumanResources.Client.Enums;
 using HumanResources.Client.Shared.Dto.Request;
 using HumanResources.Client.Shared.Dto.Response;
+using HumanResources.Client.Shared.Parameters;
 using System.Diagnostics.Contracts;
 
 namespace HumanResources.Client.Methods;
 
-public class Workers
+public class Workers : BaseMethods
 {
 	private string _url;
 	private GenericHttpMethods _genericHttpMethods;
@@ -21,9 +22,10 @@ public class Workers
 		_endpoints = endpoints;
 	}
 
-	public async Task<IEnumerable<WorkerResponseDto>> GetAllAsync(Guid companyId, Guid departmentId)
+	public async Task<IEnumerable<WorkerResponseDto>> GetAllAsync(Guid companyId, Guid departmentId, WorkerRequestParameters parameters)
 	{
 		var uri = GetUri(Endpoint.workers, companyId, departmentId);
+		uri = AddParametersToUri(uri, parameters);
 		var response = await _genericHttpMethods.GetAsync<IEnumerable<WorkerResponseDto>>(uri);
 		return response;
 	}
