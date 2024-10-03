@@ -12,6 +12,7 @@ public enum Endpoint
 	professionsWithId,
 
 	vacancies,
+	vacanciesProfession,
 	vacanciesWithId,
 
 	workers,

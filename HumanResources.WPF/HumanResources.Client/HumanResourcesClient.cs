@@ -5,7 +5,7 @@ namespace HumanResources.Client;
 
 public class HumanResourcesClient
 {
-    private string _domain; 
+    private string _url; 
 	private HttpClient _httpClient;
 	private GenericHttpMethods _genericHttpMethods;
 	private Dictionary<Endpoint, string> _endpoints;
@@ -15,9 +15,9 @@ public class HumanResourcesClient
     public Vacancies Vacancies { get; private set; }
     public Professions Professions { get; private set; }
     public Workers Workers { get; private set; }
-    public HumanResourcesClient(string domain)
+    public HumanResourcesClient(string url)
     {
-        _domain = domain;
+        _url = url;
         _httpClient = new HttpClient();
         _genericHttpMethods = new GenericHttpMethods(new HttpClient());
 		_endpoints = new Dictionary<Endpoint, string>() 
@@ -30,6 +30,7 @@ public class HumanResourcesClient
 
             { Endpoint.vacancies, "/api/companies/{companyId}/vacancies" },
             { Endpoint.vacanciesWithId, "/api/companies/{companyId}/vacancies/{id}" },
+            { Endpoint.vacanciesProfession, "/api/companies/{companyId}/vacancies/{id}/profession" },
 
             { Endpoint.professions, "/api/professions" },
             { Endpoint.professionsWithId, "/api/professions/{id}" },
@@ -38,10 +39,10 @@ public class HumanResourcesClient
 			{ Endpoint.workersWithId, "/api/companies/{companyId}/departments/{departmentId}/workers/{id}" },
 		};
 
-        Companies = new Companies(_domain, _genericHttpMethods, _endpoints);
-        Departmens = new Departmens(_domain, _genericHttpMethods, _endpoints);
-        Vacancies = new Vacancies(_domain, _genericHttpMethods, _endpoints);
-        Professions = new Professions(_domain, _genericHttpMethods, _endpoints);
-        Workers = new Workers(_domain, _genericHttpMethods, _endpoints);
+        Companies = new Companies(_url, _genericHttpMethods, _endpoints);
+        Departmens = new Departmens(_url, _genericHttpMethods, _endpoints);
+        Vacancies = new Vacancies(_url, _genericHttpMethods, _endpoints);
+        Professions = new Professions(_url, _genericHttpMethods, _endpoints);
+        Workers = new Workers(_url, _genericHttpMethods, _endpoints);
     }
 }

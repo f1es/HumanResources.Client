@@ -6,16 +6,16 @@ namespace HumanResources.Client.Methods;
 
 public class Vacancies
 {
-	private string _domain;
+	private string _url;
 	private GenericHttpMethods _genericHttpMethods;
 	private Dictionary<Endpoint, string> _endpoints;
 
 	public Vacancies(
-		string domain,
+		string url,
 		GenericHttpMethods genericHttpMethods,
 		Dictionary<Endpoint, string> endpoints)
 	{
-		_domain = domain;
+		_url = url;
 		_genericHttpMethods = genericHttpMethods;
 		_endpoints = endpoints;
 	}
@@ -53,11 +53,18 @@ public class Vacancies
 		await _genericHttpMethods.PutAsync(uri, vacancyDto);
 	}
 
+	public async Task<ProfessionResponseDto> GetProfessionAsync(Guid companyId, Guid id)
+	{
+		var uri = GetUriWithId(Endpoint.vacanciesProfession, companyId, id);
+		var response = await _genericHttpMethods.GetAsync<ProfessionResponseDto>(uri);
+		return response;
+	}
+
 	private string GetUri(
 		Endpoint endpoint, 
 		Guid companyId, 
 		string companyIdExpression = "{companyId}") =>
-		$"{_domain}{_endpoints[endpoint]}"
+		$"{_url}{_endpoints[endpoint]}"
 		.Replace(companyIdExpression, companyId.ToString());
 
 	private string GetUriWithId(Endpoint endpoint, Guid companyId, Guid id, string idExpression = "{id}") =>
