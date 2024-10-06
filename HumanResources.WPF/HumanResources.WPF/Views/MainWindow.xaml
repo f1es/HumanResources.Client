@@ -6,39 +6,66 @@
         xmlns:local="clr-namespace:HumanResources.WPF"
         xmlns:vm="clr-namespace:HumanResources.WPF.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="HumanResources" 
         Height="1080" Width="1920"
-        WindowStartupLocation="CenterScreen">
-    
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    
+
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="-0.2,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF8ABBF1" Offset="0.1"/>
+                <GradientStop Color="#FFC0DDEF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
         <ListView HorizontalAlignment="Left"
-                  Height="auto"
-                  Width="400"
-                  HorizontalContentAlignment="Center"
-                  SelectionMode="Single">
+                  Height="650"
+                  Width="250"
+                  HorizontalContentAlignment="Right"
+                  SelectionMode="Single"
+                  Grid.Column="0"
+                  Style="{StaticResource MainWindowListViewStyle}"
+                  ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}"
+                  Margin="1,150,0,0">
 
-            <Button Content="123"
-                    Height="75"
-                    Width="350"/>
-
-            <Button Content="123"
-                    Height="75"
-                    Width="350"/>
-
-            <Button Content="123"
-                    Height="75"
-                    Width="350"/>
+            <RadioButton Content="Companies"
+                         Style="{StaticResource MainWindowRadioButtonStyle}"
+                         IsChecked="True"/>
+            <RadioButton Content="Departments"
+                         Style="{StaticResource MainWindowRadioButtonStyle}"/>
+            <RadioButton Content="Workers"
+                         Style="{StaticResource MainWindowRadioButtonStyle}"/>
+            <RadioButton Content="Professions"
+                         Style="{StaticResource MainWindowRadioButtonStyle}"/>
+            <RadioButton Content="Vacancies"
+                         Style="{StaticResource MainWindowRadioButtonStyle}"/>
 
         </ListView>
+
+        <Border Grid.Column="1"
+                Height="950"
+                Width="1650"
+                HorizontalAlignment="Left"
+                CornerRadius="35"
+                Background="#FF5886A9">
+            <Frame Height="950"
+                   Width="1650"
+                   HorizontalAlignment="Left">
+            </Frame>
+        </Border>
         
-        <DataGrid Height="500"
-                  Width="1000"
-                  ItemsSource="{Binding Companies.Result}"/>
+        
+
     </Grid>
-    
+
 </Window>
