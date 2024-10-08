@@ -6,13 +6,13 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="\Resources\Fonts\Comfortaa-SemiBold.ttf#Comfortaa SemiBold"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="22"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontStyle" Value="Oblique"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Right"/>
-        <Setter Property="MinHeight" Value="60"/>
+        <Setter Property="Height" Value="75"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -23,7 +23,7 @@
                                 MinHeight="{TemplateBinding MinHeight}"
                                 Height="{TemplateBinding Height}"
                                 HorizontalAlignment="Left"
-                                Width="200"
+                                Width="220"
                                 CornerRadius="15,0,0,15"
                                 Margin="0,0,-5,0"/>
 
@@ -51,7 +51,7 @@
                                         MinHeight="{TemplateBinding MinHeight}"
                                         Height="{TemplateBinding Height}"
                                         HorizontalAlignment="Right"
-                                        Width="200"
+                                        Width="220"
                                         CornerRadius="15,0,0,15"
                                         Margin="0,0,-5,0"/>  
 
