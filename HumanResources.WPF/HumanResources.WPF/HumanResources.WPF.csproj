@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Fonts\Comfortaa-SemiBold.ttf" />
+    <None Remove="Resources\Images\delete.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\Fonts\Comfortaa-SemiBold.ttf" />
+    <Resource Include="Resources\Images\delete.png" />
   </ItemGroup>
 
 </Project>
