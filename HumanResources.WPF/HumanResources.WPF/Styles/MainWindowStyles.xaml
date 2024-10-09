@@ -24,7 +24,7 @@
                                 Height="{TemplateBinding Height}"
                                 HorizontalAlignment="Left"
                                 Width="220"
-                                CornerRadius="15,0,0,15"
+                                CornerRadius="20,0,0,20"
                                 Margin="0,0,-5,0"/>
 
                         <ContentPresenter x:Name="contentPresenter"
@@ -75,22 +75,6 @@
     <Style x:Key="MainWindowListViewStyle" TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="Transparent"/>
-    </Style>
-
-    <Style x:Key="ListViewItemWithoutBackgroundStyle" TargetType="{x:Type ListViewItem}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="Margin" Value="50,0,0,0"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ListViewItem">
-                    <Border Background="Transparent">
-                        <ContentPresenter/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style x:Key="ArrowButtonStyle" TargetType="{x:Type Button}">
