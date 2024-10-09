@@ -29,8 +29,6 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        
-        
         <ListView HorizontalAlignment="Left"
                   Height="650"
                   Width="275"
@@ -90,9 +88,36 @@
                                 Style="{StaticResource ArrowButtonStyle}"/>
                     </Viewbox>
 
+
+                    <Border Grid.Column="2" 
+                            Background="#FF3E6588"
+                            CornerRadius="20"
+                            Height="50" Width="350">
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox Style="{StaticResource SearchTextBoxStyle}"
+                                     Height="50" Width="290"
+                                     HorizontalAlignment="Right"/>
+
+                            <Button Grid.Column="1"
+                                    Style="{StaticResource TransparentButtonStyle}">
+                                
+                            </Button>
+
+                        </Grid>
+                        
+                        
+                    </Border>
+
                 </Grid>
 
-                <ListView Width="1600" Height="850"
+                <!--<ListView Width="1600" Height="850"
                           Background="Transparent"
                           BorderThickness="0"
                           Margin="0,50,0,0">
@@ -102,12 +127,16 @@
                     <v:ProfessionView/>
                     <v:WorkerView/>
                     <v:VacancyView/>
-                </ListView>
+                </ListView>-->
 
-                <!--<Frame Height="850" 
+                <Frame Height="850" 
                        Width="1600"
-                       Margin="0,50,0,0">
-                </Frame>-->
+                       Margin="0,50,0,0"
+                       Source="{Binding Page}">
+                    
+                    
+                    
+                </Frame>
                 
             </Grid>
             
