@@ -1,10 +1,11 @@
 ﻿using HumanResources.Client.Enums;
 using HumanResources.Client.Shared.Dto.Request;
 using HumanResources.Client.Shared.Dto.Response;
+using HumanResources.Client.Shared.Parameters;
 
 namespace HumanResources.Client.Methods;
 
-public class Professions
+public class Professions : BaseMethods
 {
 	private string _url;
 	private GenericHttpMethods _genericHttpMethods;
@@ -20,9 +21,9 @@ public class Professions
 		_endpoints = endpoints;
 	}
 
-	public async Task<IEnumerable<ProfessionResponseDto>> GetAllAsync() =>
+	public async Task<IEnumerable<ProfessionResponseDto>> GetAllAsync(ProfessionRequestParameters parameters) =>
 		await _genericHttpMethods
-		.GetAsync<IEnumerable<ProfessionResponseDto>>(GetUri(Endpoint.professions));
+		.GetAsync<IEnumerable<ProfessionResponseDto>>(AddParametersToUri(GetUri(Endpoint.professions), parameters));
 
 	public async Task<ProfessionResponseDto> GetByIdAsync(Guid id)
 	{

@@ -1,29 +1,31 @@
 ﻿using HumanResources.Client.Enums;
 using HumanResources.Client.Shared.Dto.Request;
 using HumanResources.Client.Shared.Dto.Response;
+using HumanResources.Client.Shared.Parameters;
 
 namespace HumanResources.Client.Methods;
 
-public class Companies
+public class Companies : BaseMethods
 {
     private string _url;
     private GenericHttpMethods _genericHttpMethods;
     private Dictionary<Endpoint, string> _endpoints;
+    private ParametersBuilder _parametersBuilder;
 
     public Companies(
         string url,
 		GenericHttpMethods genericHttpMethods,
-        Dictionary<Endpoint, string> endpoints
-        )
+        Dictionary<Endpoint, string> endpoints)
     {
         _url = url;
         _genericHttpMethods = genericHttpMethods;
 		_endpoints = endpoints;
+        _parametersBuilder = new ParametersBuilder();
     }
 
-    public async Task<IEnumerable<CompanyResponseDto>> GetAllAsync() =>
+    public async Task<IEnumerable<CompanyResponseDto>> GetAllAsync(CompanyRequestParameters parameters) =>
         await _genericHttpMethods
-        .GetAsync<IEnumerable<CompanyResponseDto>>(GetUri(Endpoint.companies));
+        .GetAsync<IEnumerable<CompanyResponseDto>>(AddParametersToUri(GetUri(Endpoint.companies), parameters));
 
     public async Task<CompanyResponseDto> GetByIdAsync(Guid id)
     {
