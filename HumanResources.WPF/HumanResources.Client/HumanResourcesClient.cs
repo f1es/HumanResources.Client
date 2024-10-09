@@ -1,5 +1,6 @@
 ﻿using HumanResources.Client.Enums;
 using HumanResources.Client.Methods;
+using IdentityModel.Client;
 
 namespace HumanResources.Client;
 
@@ -19,7 +20,7 @@ public class HumanResourcesClient
     {
         _url = url;
         _httpClient = new HttpClient();
-        _genericHttpMethods = new GenericHttpMethods(new HttpClient());
+        _genericHttpMethods = new GenericHttpMethods(_httpClient);
 		_endpoints = new Dictionary<Endpoint, string>() 
         {
             { Endpoint.companies, "/api/companies" },
@@ -44,5 +45,22 @@ public class HumanResourcesClient
         Vacancies = new Vacancies(_url, _genericHttpMethods, _endpoints);
         Professions = new Professions(_url, _genericHttpMethods, _endpoints);
         Workers = new Workers(_url, _genericHttpMethods, _endpoints);
+    }
+    public async Task GetCredentialsToken()
+    {
+        var tokenRequest = new ClientCredentialsTokenRequest()
+        {
+            Address = "http://localhost:5000/connect/token",
+            ClientId = "wpf_client",
+            Scope = "api1",
+        };
+        var tokenResponse = await _httpClient.RequestClientCredentialsTokenAsync(tokenRequest);
+
+        if (tokenResponse.IsError)
+        {
+            throw new Exception(tokenResponse.Error);
+        }
+
+        _httpClient.SetBearerToken(tokenResponse.AccessToken);
     }
 }
