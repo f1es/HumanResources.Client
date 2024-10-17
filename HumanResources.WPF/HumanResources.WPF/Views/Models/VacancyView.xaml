@@ -11,8 +11,8 @@
         <vm:VacancyViewModel/>
     </UserControl.DataContext>
 
-    <Border Height="90"
-            Width="1500"
+    <Border Height="{StaticResource ModelHeight}"
+            Width="{StaticResource ModelWidth}"
             Background="White"
             CornerRadius="20">
 
@@ -20,6 +20,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
@@ -42,7 +43,14 @@
                            VerticalAlignment="Center"
                            Grid.Column="1"/>
             </WrapPanel>
-            
+
+
+            <Button Grid.Column="2"
+                     Height="40"
+                     Width="40"
+                     Style="{StaticResource TransparentButtonStyle}">
+                <Image Source="/Resources/Images/edit.png"/>
+            </Button>
 
             <Button Style="{StaticResource TransparentButtonStyle}"
                     Height="40" Width="40"
