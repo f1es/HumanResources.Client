@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="/Styles/MainWindowStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/CompanyViewStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/GenericStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/Sizes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
