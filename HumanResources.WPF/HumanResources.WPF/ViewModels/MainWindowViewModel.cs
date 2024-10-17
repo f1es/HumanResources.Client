@@ -27,6 +27,7 @@ public class MainWindowViewModel : ObservableObject
     {
 		_humanResourcesClient = new HumanResourcesClient(_domain);
 		Companies = new NotifyTaskCompletion<IEnumerable<CompanyResponseDto>>(GetCompanies());
+		Page = new DepartmentsPageView();
     }
 
 	public async Task<IEnumerable<CompanyResponseDto>> GetCompanies()
