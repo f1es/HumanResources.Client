@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="HumanResources.WPF.Views.Models.ProfessionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HumanResources.WPF.Views.Models"
+             xmlns:vm="clr-namespace:HumanResources.WPF.ViewModels.Models"
+             mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <vm:ProfessionViewModel/>
+    </UserControl.DataContext>
+
+    <Border Height="{StaticResource ModelHeight}"
+        Width="{StaticResource ModelWidth}"
+        Background="White"
+        CornerRadius="20">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="{Binding Profession.Name}"
+                       Style="{StaticResource TextBlockStyle}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <WrapPanel Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                
+                <TextBlock Text="Salary - "
+                           Style="{StaticResource TextBlockStyle}"/>
+                
+                <TextBlock Text="{Binding Profession.Salary}"
+                           Style="{StaticResource TextBlockStyle}"/>
+
+
+            </WrapPanel>
+
+            <Button Grid.Column="2"
+                     Height="40"
+                     Width="40"
+                     Style="{StaticResource TransparentButtonStyle}">
+                <Image Source="/Resources/Images/edit.png"/>
+            </Button>
+
+            <Button Style="{StaticResource TransparentButtonStyle}"
+                    Height="40" Width="40"
+                    Grid.Column="3">
+                <Image Source="/Resources/Images/delete.png"/>
+            </Button>
+
+        </Grid>
+
+
+    </Border>
+
+</UserControl>
