@@ -4,10 +4,21 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HumanResources.WPF.Views.Pages"
+      xmlns:convertors="clr-namespace:HumanResources.WPF.Convertors"
       mc:Ignorable="d"
-      xmlns:v="clr-namespace:HumanResources.WPF.Views.Models"
+      xmlns:vmod="clr-namespace:HumanResources.WPF.Views.Models"
+      xmlns:v="clr-namespace:HumanResources.WPF.Views"
+      xmlns:vm="clr-namespace:HumanResources.WPF.ViewModels.Pages"
       Title="ProfessionsPageView">
 
+    <Page.Resources>
+        <convertors:UintToStringConvertor x:Key="uintToStringConvertor"/>
+    </Page.Resources>
+    
+    <Page.DataContext>
+        <vm:ProfessionsPageViewModel/>
+    </Page.DataContext>
+    
     <Grid Height="925" 
           Width="1600">
 
@@ -18,21 +29,23 @@
 
         <!--Parameters Grid-->
         <Grid Grid.Column="0"
-      Margin="125,5,0,0">
+              Margin="125,5,0,0">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="400"/>
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="75"/>
-                <ColumnDefinition Width="750"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="530"/>
             </Grid.ColumnDefinitions>
 
             <!--Search TextBox-->
             <Border Grid.Column="0" 
-            Background="#FF3E6588"
-            CornerRadius="20"
-            Height="50" Width="350"
-            VerticalAlignment="Top">
+                    Background="#FF3E6588"
+                    CornerRadius="20"
+                    Height="50" Width="350"
+                    VerticalAlignment="Top">
 
                 <Grid>
 
@@ -41,15 +54,17 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Style="{StaticResource SearchTextBoxStyle}"
-                     Height="50" Width="290"
-                     HorizontalAlignment="Right"/>
+                    <v:WatermarkTextBox Style="{StaticResource SearchTextBoxStyle}"
+                                         Height="50" Width="290"
+                                         HorizontalAlignment="Right"
+                                         Text="{Binding RequestParameters.SearchTerm}"/>
 
                     <Button Grid.Column="1"
-                    Style="{StaticResource TransparentButtonStyle}">
-                        <Image Source="/Resources/Images/search.png"
-                       Height="30"
-                       Width="30"/>
+                            Style="{StaticResource TransparentButtonStyle}"
+                            Command="{Binding Commands[Search]}">
+                                <Image Source="/Resources/Images/search.png"
+                               Height="30"
+                               Width="30"/>
                     </Button>
 
 
@@ -60,24 +75,20 @@
 
             <!--Sort Combobox-->
             <Border Background="#FF3E6588"
-            Grid.Column="1"
-            CornerRadius="20"
-            Height="50"
-            VerticalAlignment="Top">
+                    Grid.Column="1"
+                    CornerRadius="20"
+                    Height="50"
+                    VerticalAlignment="Top">
 
                 <ComboBox Height="35"
-                  Width="220"
-                  Grid.Column="1"
-                  Style="{StaticResource ComboBoxFlatStyle}"
-                  Background="Transparent"
-                  BorderThickness="0">
-                    <ComboBox.Items>
-                        <ComboBoxItem Content="Name A-Z"
-                              IsSelected="True"/>
-                        <ComboBoxItem Content="Name Z-A" />
-                        <ComboBoxItem Content="Oldest" />
-                        <ComboBoxItem Content="Newest" />
-                    </ComboBox.Items>
+                          Width="220"
+                          Grid.Column="1"
+                          Style="{StaticResource ComboBoxFlatStyle}"
+                          ItemsSource="{Binding SortTypes.Keys}"
+                          SelectedItem="{Binding SortType}"
+                          Background="Transparent"
+                          BorderThickness="0">
+                    
                 </ComboBox>
             </Border>
 
@@ -92,6 +103,40 @@
                     FontSize="35"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"/>
+
+            <Border Background="#FF3E6588"
+                    Grid.Column="3"
+                    CornerRadius="20"
+                    Height="50"
+                    Width="100"
+                    VerticalAlignment="Top">
+                <v:WatermarkTextBox Grid.Column="3"
+                                   Height="50"
+                                   Width="90"
+                                   VerticalAlignment="Top"
+                                   Style="{StaticResource SearchTextBoxStyle}"
+                                   Text="{Binding RequestParameters.MinSalary, Converter={StaticResource uintToStringConvertor}}"
+                                   Watermark="Min Salary">
+                </v:WatermarkTextBox>
+            </Border>
+
+            <Border Background="#FF3E6588"
+                    Grid.Column="4"
+                    CornerRadius="20"
+                    Height="50"
+                    Width="100"
+                    VerticalAlignment="Top">
+                <v:WatermarkTextBox Grid.Column="3"
+                                   Height="50"
+                                   Width="90"
+                                   VerticalAlignment="Top"
+                                   Style="{StaticResource SearchTextBoxStyle}"
+                                   Text="{Binding RequestParameters.MaxSalary, Converter={StaticResource uintToStringConvertor}}"
+                                   Watermark="Max Salary">
+
+                </v:WatermarkTextBox>
+            </Border>
+
 
         </Grid>
 
@@ -109,8 +154,10 @@
                       HorizontalAlignment="Center"
                       Margin="0,0,0,0"
                       Style="{StaticResource MainWindowListViewStyle}"
-                      ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}">
+                      ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}"
+                      ItemsSource="{Binding Professions}">
 
+                <!--<v:DepartmentView/>
                 <v:DepartmentView/>
                 <v:DepartmentView/>
                 <v:DepartmentView/>
@@ -119,8 +166,7 @@
                 <v:DepartmentView/>
                 <v:DepartmentView/>
                 <v:DepartmentView/>
-                <v:DepartmentView/>
-                <v:DepartmentView/>
+                <v:DepartmentView/>-->
 
             </ListView>
 
@@ -129,10 +175,10 @@
 
 
         <Grid VerticalAlignment="Bottom"
-      HorizontalAlignment="Center"
-      Margin="25,15,0,35"
-      Width="175"
-      Grid.Row="1">
+              HorizontalAlignment="Center"
+              Margin="25,15,0,35"
+              Width="175"
+              Grid.Row="1"> 
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
@@ -150,13 +196,13 @@
                        Grid.Column="1"
                        Foreground="White"
                        HorizontalAlignment="Center"
-                       Height="25">
-                    1
+                       Height="25"
+                       Text="{Binding PageNumber}">
             </TextBlock>
 
 
             <Viewbox Style="{StaticResource ArrowViewboxStyle}"
-                    Grid.Column="2">
+                     Grid.Column="2">
                 <Button Height="40" Width="40"
                         Content="&gt;"
                         Style="{StaticResource ArrowButtonStyle}"/>

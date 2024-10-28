@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HumanResources.WPF.Views.Pages"
-      xmlns:v="clr-namespace:HumanResources.WPF.Views.Models"
+      xmlns:vmod="clr-namespace:HumanResources.WPF.Views.Models"
+      xmlns:v="clr-namespace:HumanResources.WPF.Views"
       xmlns:vm="clr-namespace:HumanResources.WPF.ViewModels.Pages"
       mc:Ignorable="d"
       Title="CompaniesPageView">
@@ -26,7 +27,7 @@
               Margin="125,5,0,0">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="400"/>
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="750"/>
@@ -46,12 +47,14 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Style="{StaticResource SearchTextBoxStyle}"
-                             Height="50" Width="290"
-                             HorizontalAlignment="Right"/>
+                    <v:WatermarkTextBox Style="{StaticResource SearchTextBoxStyle}"
+                                         Height="50" Width="290"
+                                         HorizontalAlignment="Right"
+                                         Text="{Binding RequestParameters.SearchTerm}"/>
 
                     <Button Grid.Column="1"
-                            Style="{StaticResource TransparentButtonStyle}">
+                            Style="{StaticResource TransparentButtonStyle}"
+                            Command="{Binding Commands[Search]}">
                         <Image Source="/Resources/Images/search.png"
                                Height="30"
                                Width="30"/>
@@ -75,14 +78,16 @@
                           Grid.Column="1"
                           Style="{StaticResource ComboBoxFlatStyle}"
                           Background="Transparent"
-                          BorderThickness="0">
-                    <ComboBox.Items>
+                          BorderThickness="0"
+                          ItemsSource="{Binding SortTypes.Keys}"
+                          SelectedItem="{Binding SortType}">
+                    <!--<ComboBox.Items>
                         <ComboBoxItem Content="Name A-Z"
                                       IsSelected="True"/>
                         <ComboBoxItem Content="Name Z-A" />
                         <ComboBoxItem Content="Oldest" />
                         <ComboBoxItem Content="Newest" />
-                    </ComboBox.Items>
+                    </ComboBox.Items>-->
                 </ComboBox>
             </Border>
 
@@ -114,8 +119,10 @@
                       HorizontalAlignment="Center"
                       Margin="0,0,0,0"
                       Style="{StaticResource MainWindowListViewStyle}"
-                      ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}">
+                      ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}"
+                      ItemsSource="{Binding Companies}">
 
+                <!--<v:CompanyView/>
                 <v:CompanyView/>
                 <v:CompanyView/>
                 <v:CompanyView/>
@@ -124,8 +131,7 @@
                 <v:CompanyView/>
                 <v:CompanyView/>
                 <v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>
+                <v:CompanyView/>-->
 
             </ListView>
             
@@ -148,23 +154,25 @@
             <Viewbox Style="{StaticResource ArrowViewboxStyle}">
                 <Button Height="40" Width="40"
                         Content="&lt;"
-                        Style="{StaticResource ArrowButtonStyle}"/>
+                        Style="{StaticResource ArrowButtonStyle}"
+                        Command="{Binding Commands[PreviousPage]}"/>
             </Viewbox>
 
             <TextBlock Style="{StaticResource TextBlockStyle}"
                        Grid.Column="1"
                        Foreground="White"
                        HorizontalAlignment="Center"
-                       Height="25">
-                1
+                       Height="25"
+                       Text="{Binding PageNumber}">
             </TextBlock>
             
             
             <Viewbox Style="{StaticResource ArrowViewboxStyle}"
-             Grid.Column="2">
+                     Grid.Column="2">
                 <Button Height="40" Width="40"
-                Content="&gt;"
-                Style="{StaticResource ArrowButtonStyle}"/>
+                        Content="&gt;"
+                        Style="{StaticResource ArrowButtonStyle}"
+                        Command="{Binding Commands[NextPage]}"/>
             </Viewbox>
 
             

@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:v="clr-namespace:HumanResources.WPF.Views.Models"
+      xmlns:vmod="clr-namespace:HumanResources.WPF.Views.Models"
+      xmlns:v="clr-namespace:HumanResources.WPF.Views"
       xmlns:local="clr-namespace:HumanResources.WPF.Views.Pages"
       mc:Ignorable="d"
       Title="WorkersPageView">
@@ -21,7 +22,7 @@
   Margin="125,5,0,0">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="400"/>
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="750"/>
@@ -41,9 +42,9 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Style="{StaticResource SearchTextBoxStyle}"
-                             Height="50" Width="290"
-                             HorizontalAlignment="Right"/>
+                    <v:WatermarkTextBox Style="{StaticResource SearchTextBoxStyle}"
+                                         Height="50" Width="290"
+                                         HorizontalAlignment="Right"/>
 
                     <Button Grid.Column="1"
                             Style="{StaticResource TransparentButtonStyle}">
@@ -109,16 +110,16 @@
                       Style="{StaticResource MainWindowListViewStyle}"
                       ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}">
 
-                <v:WorkerView/>
-                <v:WorkerView/>
-                <v:WorkerView/>
-                <v:WorkerView/>
-                <v:WorkerView/>
-                <v:WorkerView/>
-                <v:WorkerView/>
-                <v:WorkerView/>
-                <v:WorkerView/>
-                <v:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
+                <vmod:WorkerView/>
 
             </ListView>
 
