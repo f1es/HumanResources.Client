@@ -18,7 +18,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="850"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
@@ -26,12 +26,14 @@
 
             <TextBlock Text="{Binding Profession.Name}"
                        Style="{StaticResource TextBlockStyle}"
-                       HorizontalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="25,0,0,0"
                        VerticalAlignment="Center"/>
 
             <WrapPanel Grid.Column="1"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center">
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="25,0,0,0">
                 
                 <TextBlock Text="Salary - "
                            Style="{StaticResource TextBlockStyle}"/>
