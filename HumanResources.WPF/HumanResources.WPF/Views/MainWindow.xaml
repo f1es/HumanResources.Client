@@ -37,19 +37,26 @@
                   Grid.Column="0"
                   Style="{StaticResource MainWindowListViewStyle}"
                   ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}"
-                  Margin="1,150,0,0">
+                  Margin="1,150,0,0"
+                  SelectedItem="{Binding PageSelector}">
 
             <RadioButton Content="Companies"
                          Style="{StaticResource MainWindowRadioButtonStyle}"
-                         IsChecked="True"/>
-            <RadioButton Content="Departments"
+                         IsChecked="True"
+                         Command="{Binding SelectCommand}"
+                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+            <!--<RadioButton Content="Departments"
                          Style="{StaticResource MainWindowRadioButtonStyle}"/>
             <RadioButton Content="Workers"
-                         Style="{StaticResource MainWindowRadioButtonStyle}"/>
+                         Style="{StaticResource MainWindowRadioButtonStyle}"/>-->
             <RadioButton Content="Professions"
-                         Style="{StaticResource MainWindowRadioButtonStyle}"/>
+                         Style="{StaticResource MainWindowRadioButtonStyle}"
+                         Command="{Binding SelectCommand}"
+                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
             <RadioButton Content="Vacancies"
-                         Style="{StaticResource MainWindowRadioButtonStyle}"/>
+                         Style="{StaticResource MainWindowRadioButtonStyle}"
+                         Command="{Binding SelectCommand}"
+                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
 
         </ListView>
 
@@ -106,7 +113,8 @@
                 <Frame Height="925" 
                        Width="1600"
                        Margin="0,0,0,0"
-                       Content="{Binding Page}">
+                       Content="{Binding Page}" 
+                       NavigationUIVisibility="Hidden">
                     
                     
                     
