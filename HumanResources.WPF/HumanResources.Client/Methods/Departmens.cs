@@ -1,7 +1,8 @@
 ﻿using HumanResources.Client.Enums;
-using HumanResources.Client.Shared.Dto.Request;
-using HumanResources.Client.Shared.Dto.Response;
-using HumanResources.Client.Shared.Parameters;
+using HumanResources.Core.Shared.Dto.Request;
+using HumanResources.Core.Shared.Dto.Response;
+using HumanResources.Core.Shared.Features;
+using HumanResources.Core.Shared.Parameters;
 
 namespace HumanResources.Client.Methods;
 
@@ -21,9 +22,9 @@ public class Departmens : BaseMethods
 		_endpoints = endpoints;
 	}
 
-	public async Task<IEnumerable<DepartmentResponseDto>> GetAllAsync(Guid companyId, DepartmentRequestParameters parameters) =>
+	public async Task<PagedList<DepartmentResponseDto>> GetAllAsync(Guid companyId, DepartmentRequestParameters parameters) =>
 		await _genericHttpMethods
-		.GetAsync<IEnumerable<DepartmentResponseDto>>(AddParametersToUri(GetUri(Endpoint.departments, companyId), parameters));
+		.GetPagedListAsync<DepartmentResponseDto>(AddParametersToUri(GetUri(Endpoint.departments, companyId), parameters));
 
 	public async Task<DepartmentResponseDto> GetByIdAsync(Guid companyId, Guid id)
 	{

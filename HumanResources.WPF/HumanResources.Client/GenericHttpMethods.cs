@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using HumanResources.Core.Shared.Features;
+using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace HumanResources.Client;
@@ -17,6 +18,19 @@ public class GenericHttpMethods
 		var response = await _httpClient.GetAsync(uri);
 		var responseObject = await GetResponseObjectFromJsonAsync<T>(response);
 		return responseObject;
+	}
+
+	public async Task<PagedList<T>> GetPagedListAsync<T>(string uri)
+	{
+		var response = await _httpClient.GetAsync(uri);
+		var responseObject = await GetResponseObjectFromJsonAsync<IEnumerable<T>>(response);
+		var responseObjectList = responseObject.ToList();
+
+		var pagedDataJson = response.Headers.GetValues("pagination").Single();
+		var pagedData = JsonSerializer.Deserialize<PagingData>(pagedDataJson);
+
+		var pagedList = new PagedList<T>(responseObjectList, pagedData);
+		return pagedList;
 	}
 
 	public async Task<T> PostAsync<T>(string uri, object obj)

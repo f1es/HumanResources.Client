@@ -1,10 +1,12 @@
 ﻿using HumanResources.Client.Enums;
-using HumanResources.Client.Shared.Dto.Request;
-using HumanResources.Client.Shared.Dto.Response;
+using HumanResources.Core.Shared.Dto.Request;
+using HumanResources.Core.Shared.Dto.Response;
+using HumanResources.Core.Shared.Features;
+using HumanResources.Core.Shared.Parameters;
 
 namespace HumanResources.Client.Methods;
 
-public class Vacancies
+public class Vacancies : BaseMethods
 {
 	private string _url;
 	private GenericHttpMethods _genericHttpMethods;
@@ -20,10 +22,11 @@ public class Vacancies
 		_endpoints = endpoints;
 	}
 
-	public async Task<IEnumerable<VacancyResponseDto>> GetAllAsync(Guid companyId)
+	public async Task<PagedList<VacancyResponseDto>> GetAllAsync(Guid companyId, VacancyRequestParameters requestParameters)
 	{
 		var uri = GetUri(Endpoint.vacancies, companyId);
-		var response = await _genericHttpMethods.GetAsync<IEnumerable<VacancyResponseDto>>(uri);
+		uri = AddParametersToUri(uri, requestParameters);
+		var response = await _genericHttpMethods.GetPagedListAsync<VacancyResponseDto>(uri);
 		return response;
 	} 
 
