@@ -1,4 +1,5 @@
 ﻿using HumanResources.Core.Shared.Features;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -16,6 +17,12 @@ public class GenericHttpMethods
 	public async Task<T> GetAsync<T>(string uri)
 	{
 		var response = await _httpClient.GetAsync(uri);
+
+		if (response.StatusCode != HttpStatusCode.OK)
+		{
+			await HandleException(response);
+		}
+
 		var responseObject = await GetResponseObjectFromJsonAsync<T>(response);
 		return responseObject;
 	}
@@ -23,6 +30,12 @@ public class GenericHttpMethods
 	public async Task<PagedList<T>> GetPagedListAsync<T>(string uri)
 	{
 		var response = await _httpClient.GetAsync(uri);
+
+		if (response.StatusCode != HttpStatusCode.OK)
+		{
+			await HandleException(response);
+		}
+
 		var responseObject = await GetResponseObjectFromJsonAsync<IEnumerable<T>>(response);
 		var responseObjectList = responseObject.ToList();
 
@@ -37,6 +50,12 @@ public class GenericHttpMethods
 	{
 		var content = JsonContent.Create(obj);
 		var response = await _httpClient.PostAsync(uri, content);
+
+		if (response.StatusCode != HttpStatusCode.OK)
+		{
+			await HandleException(response);
+		}
+
 		var responseObject = await GetResponseObjectFromJsonAsync<T>(response);
 		return responseObject;
 	}
@@ -55,5 +74,11 @@ public class GenericHttpMethods
 		var responseContent = await response.Content.ReadAsStringAsync();
 		var responseObject = JsonSerializer.Deserialize<T>(responseContent);
 		return responseObject;
+	}
+
+	private async Task HandleException(HttpResponseMessage response)
+	{
+		var message = await response.Content.ReadAsStringAsync();
+		throw new Exception($"{response.StatusCode} {message}");
 	}
 }

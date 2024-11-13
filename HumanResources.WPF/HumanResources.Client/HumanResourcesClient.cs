@@ -48,7 +48,7 @@ public class HumanResourcesClient
         Workers = new Workers(_url, _genericHttpMethods, _endpoints);
     }
 
-    public async Task GetAccessToken(LoginDto loginDto)
+    public async Task GetAccessTokenAsync(LoginDto loginDto)
     {
         var tokenRequest = new PasswordTokenRequest()
         {
