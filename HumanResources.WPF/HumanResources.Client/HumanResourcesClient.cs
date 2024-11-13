@@ -1,5 +1,6 @@
 ﻿using HumanResources.Client.Enums;
 using HumanResources.Client.Methods;
+using HumanResources.Shared.Dto.Request;
 using IdentityModel.Client;
 
 namespace HumanResources.Client;
@@ -16,11 +17,11 @@ public class HumanResourcesClient
     public Vacancies Vacancies { get; private set; }
     public Professions Professions { get; private set; }
     public Workers Workers { get; private set; }
-    public HumanResourcesClient(string url)
+    public HumanResourcesClient()
     {
-        _url = url;
+        _url = "http://localhost:5001";
         _httpClient = new HttpClient();
-        _genericHttpMethods = new GenericHttpMethods(new HttpClient());
+        _genericHttpMethods = new GenericHttpMethods(_httpClient);
 		_endpoints = new Dictionary<Endpoint, string>() 
         {
             { Endpoint.companies, "/api/companies" },
@@ -46,15 +47,18 @@ public class HumanResourcesClient
         Professions = new Professions(_url, _genericHttpMethods, _endpoints);
         Workers = new Workers(_url, _genericHttpMethods, _endpoints);
     }
-	public async Task GetCredentialsToken()
-	{
-		var tokenRequest = new ClientCredentialsTokenRequest()
-		{
+
+    public async Task GetAccessToken(LoginDto loginDto)
+    {
+        var tokenRequest = new PasswordTokenRequest()
+        {
 			Address = "http://localhost:5000/connect/token",
 			ClientId = "wpf_client",
 			Scope = "api1",
+            UserName = loginDto.UserName,
+            Password = loginDto.Password
 		};
-		var tokenResponse = await _httpClient.RequestClientCredentialsTokenAsync(tokenRequest);
+        var tokenResponse = await _httpClient.RequestPasswordTokenAsync(tokenRequest);
 
 		if (tokenResponse.IsError)
 		{
