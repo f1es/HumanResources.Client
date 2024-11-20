@@ -1,10 +1,9 @@
 ﻿using HumanResources.Client;
-using HumanResources.Client.Shared.Parameters;
+using HumanResources.Core.Shared.Parameters;
+using HumanResources.Shared.Dto.Request;
 using System.Text.Json;
 
-
-var domain = "https://localhost:44327";
-var hrClient = new HumanResourcesClient(domain);
+var hrClient = new HumanResourcesClient();
 var serializerOptions = new JsonSerializerOptions()
 {
 	WriteIndented = true
@@ -12,8 +11,9 @@ var serializerOptions = new JsonSerializerOptions()
 
 try
 {
+	var loginDto = new LoginDto("string", "string");
 
-	await hrClient.GetCredentialsToken();
+	//await hrClient.GetAccessToken(loginDto);
 
 	var resp = await hrClient.Companies.GetAllAsync(new CompanyRequestParameters());
 	Console.WriteLine(JsonSerializer.Serialize(resp, serializerOptions));

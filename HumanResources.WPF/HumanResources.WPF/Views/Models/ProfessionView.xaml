@@ -35,25 +35,27 @@
                        VerticalAlignment="Center"
                        Margin="25,0,0,0">
                 
-                <TextBlock Text="Salary - "
-                           Style="{StaticResource TextBlockStyle}"/>
                 
                 <TextBlock Text="{Binding Profession.Salary}"
                            Style="{StaticResource TextBlockStyle}"/>
 
+                <TextBlock Text="$"
+                           Style="{StaticResource TextBlockStyle}"/>
 
             </WrapPanel>
 
             <Button Grid.Column="2"
                      Height="40"
                      Width="40"
-                     Style="{StaticResource TransparentButtonStyle}">
+                     Style="{StaticResource TransparentButtonStyle}"
+                     Command="{Binding Commands[Edit]}">
                 <Image Source="/Resources/Images/edit.png"/>
             </Button>
 
             <Button Style="{StaticResource TransparentButtonStyle}"
                     Height="40" Width="40"
-                    Grid.Column="3">
+                    Grid.Column="3"
+                    Command="{Binding Commands[Delete]}">
                 <Image Source="/Resources/Images/delete.png"/>
             </Button>
 

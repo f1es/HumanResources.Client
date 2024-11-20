@@ -54,10 +54,12 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <v:WatermarkTextBox Style="{StaticResource SearchTextBoxStyle}"
-                                         Height="50" Width="290"
-                                         HorizontalAlignment="Right"
-                                         Text="{Binding RequestParameters.SearchTerm}"/>
+                    <v:HintTextBox Hint="Search"
+                                   TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                   HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
+                                   Height="50" Width="290"
+                                   HorizontalAlignment="Right"
+                                   Text="{Binding RequestParameters.SearchTerm}"/>
 
                     <Button Grid.Column="1"
                             Style="{StaticResource TransparentButtonStyle}"
@@ -102,7 +104,8 @@
                     Content="+"
                     FontSize="35"
                     VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding Commands[Add]}"/>
 
             <Border Background="#FF3E6588"
                     Grid.Column="3"
@@ -110,14 +113,15 @@
                     Height="50"
                     Width="100"
                     VerticalAlignment="Top">
-                <v:WatermarkTextBox Grid.Column="3"
+                <v:HintTextBox Grid.Column="3"
                                    Height="50"
                                    Width="90"
                                    VerticalAlignment="Top"
-                                   Style="{StaticResource SearchTextBoxStyle}"
+                                   TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                   HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
                                    Text="{Binding RequestParameters.MinSalary, Converter={StaticResource uintToStringConvertor}}"
-                                   Watermark="Min Salary">
-                </v:WatermarkTextBox>
+                                   Hint="Min Salary">
+                </v:HintTextBox>
             </Border>
 
             <Border Background="#FF3E6588"
@@ -126,15 +130,16 @@
                     Height="50"
                     Width="100"
                     VerticalAlignment="Top">
-                <v:WatermarkTextBox Grid.Column="3"
+                <v:HintTextBox Grid.Column="3"
                                    Height="50"
                                    Width="90"
                                    VerticalAlignment="Top"
-                                   Style="{StaticResource SearchTextBoxStyle}"
+                                   TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                   HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
                                    Text="{Binding RequestParameters.MaxSalary, Converter={StaticResource uintToStringConvertor}}"
-                                   Watermark="Max Salary">
+                                   Hint="Max Salary">
 
-                </v:WatermarkTextBox>
+                </v:HintTextBox>
             </Border>
 
 
@@ -189,7 +194,8 @@
             <Viewbox Style="{StaticResource ArrowViewboxStyle}">
                 <Button Height="40" Width="40"
                         Content="&lt;"
-                        Style="{StaticResource ArrowButtonStyle}"/>
+                        Style="{StaticResource ArrowButtonStyle}"
+                        Command="{Binding Commands[PreviousPage]}"/>
             </Viewbox>
 
             <TextBlock Style="{StaticResource TextBlockStyle}"
@@ -205,7 +211,8 @@
                      Grid.Column="2">
                 <Button Height="40" Width="40"
                         Content="&gt;"
-                        Style="{StaticResource ArrowButtonStyle}"/>
+                        Style="{StaticResource ArrowButtonStyle}"
+                        Command="{Binding Commands[NextPage]}"/>
             </Viewbox>
 
 

@@ -26,26 +26,31 @@
             
             <TextBlock Text="{Binding Department.Name}"
                        Style="{StaticResource TextBlockStyle}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="25,0,0,0"/>
 
             <Button Content="Workers"
                     Style="{StaticResource ButtonLinkStyle}"
                     Foreground="#FF2C87A5"
                     Grid.Column="1"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center"
+                    Command="{Binding Commands[Workers]}"/>
 
             <Button Grid.Column="2"
                      Height="40"
                      Width="40"
-                     Style="{StaticResource TransparentButtonStyle}">
+                     Style="{StaticResource TransparentButtonStyle}"
+                     Command="{Binding Commands[Edit]}">
                             <Image Source="/Resources/Images/edit.png"/>
             </Button>
 
             <Button Style="{StaticResource TransparentButtonStyle}"
                     Height="40" Width="40"
-                    Grid.Column="3">
+                    Grid.Column="3"
+                    Command="{Binding Commands[Delete]}">
                 <Image Source="/Resources/Images/delete.png"/>
             </Button>
 

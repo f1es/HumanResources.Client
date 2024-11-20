@@ -47,10 +47,12 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <v:WatermarkTextBox Style="{StaticResource SearchTextBoxStyle}"
-                                         Height="50" Width="290"
-                                         HorizontalAlignment="Right"
-                                         Text="{Binding RequestParameters.SearchTerm}"/>
+                    <v:HintTextBox Hint="Search"
+                                   TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                   HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
+                                   Height="50" Width="290"
+                                   HorizontalAlignment="Right"
+                                   Text="{Binding RequestParameters.SearchTerm}"/>
 
                     <Button Grid.Column="1"
                             Style="{StaticResource TransparentButtonStyle}"
@@ -72,7 +74,7 @@
                     CornerRadius="20"
                     Height="50"
                     VerticalAlignment="Top">
-                
+
                 <ComboBox Height="35"
                           Width="220"
                           Grid.Column="1"
@@ -81,13 +83,6 @@
                           BorderThickness="0"
                           ItemsSource="{Binding SortTypes.Keys}"
                           SelectedItem="{Binding SortType}">
-                    <!--<ComboBox.Items>
-                        <ComboBoxItem Content="Name A-Z"
-                                      IsSelected="True"/>
-                        <ComboBoxItem Content="Name Z-A" />
-                        <ComboBoxItem Content="Oldest" />
-                        <ComboBoxItem Content="Newest" />
-                    </ComboBox.Items>-->
                 </ComboBox>
             </Border>
 
@@ -101,7 +96,8 @@
                     Content="+"
                     FontSize="35"
                     VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding Commands[Add]}"/>
 
         </Grid>
         
@@ -113,7 +109,7 @@
                 CornerRadius="25"
                 Width="1550"
                 Height="825">
-            
+
             <ListView Width="1525"
                       Height="800"
                       HorizontalAlignment="Center"
@@ -121,17 +117,6 @@
                       Style="{StaticResource MainWindowListViewStyle}"
                       ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}"
                       ItemsSource="{Binding Companies}">
-
-                <!--<v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>
-                <v:CompanyView/>-->
 
             </ListView>
             

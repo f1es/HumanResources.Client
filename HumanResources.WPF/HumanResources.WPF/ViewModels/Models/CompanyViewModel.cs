@@ -1,6 +1,6 @@
 ﻿using FlesLib.WPF;
 using HumanResources.Client;
-using HumanResources.Client.Shared.Dto.Response;
+using HumanResources.Core.Shared.Dto.Response;
 using HumanResources.WPF.Commands.Models;
 
 namespace HumanResources.WPF.ViewModels.Models;
@@ -8,7 +8,7 @@ namespace HumanResources.WPF.ViewModels.Models;
 public class CompanyViewModel : ObservableObject
 {
 	private CompanyResponseDto _company = new CompanyResponseDto(Guid.NewGuid(), "Sample name", DateTime.Now);
-	private HumanResourcesClient _humanResourcesClient;
+	private HumanResourcesClient _client;
 	public CompanyModelCommands Commands { get; set; }
 	public CompanyResponseDto Company
 	{
@@ -19,11 +19,10 @@ public class CompanyViewModel : ObservableObject
 			OnPropertyChanged();
 		}
 	}
-	public HumanResourcesClient Client => _humanResourcesClient;
-
-    public CompanyViewModel(HumanResourcesClient humanResourcesClient)
+	public HumanResourcesClient Client => _client;
+    public CompanyViewModel(HumanResourcesClient client)
     {
-        _humanResourcesClient = humanResourcesClient;
+        _client = client;
 		Commands = new CompanyModelCommands(this);
     }
 

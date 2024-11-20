@@ -1,12 +1,22 @@
 ﻿using FlesLib.WPF;
-using HumanResources.Client.Shared.Dto.Response;
+using HumanResources.Client;
+using HumanResources.Core.Shared.Dto.Response;
+using HumanResources.WPF.Commands.Models;
 
 namespace HumanResources.WPF.ViewModels.Models;
 
 public class VacancyViewModel : ObservableObject
 {
-	private VacancyResponseDto _vacancy = new VacancyResponseDto(Guid.NewGuid(), DateTime.Now, "Sapmle description");
+	private HumanResourcesClient _client;
+	private VacancyResponseDto _vacancy = new VacancyResponseDto(
+		Guid.NewGuid(),
+		DateTime.Now,
+		"Sapmle description",
+		Guid.NewGuid(),
+		Guid.NewGuid());
+	private VacancyModelCommands _commands;
 
+	public HumanResourcesClient Client => _client;
 	public VacancyResponseDto Vacancy
 	{
 		get => _vacancy;
@@ -16,4 +26,14 @@ public class VacancyViewModel : ObservableObject
 			OnPropertyChanged();
 		}
 	}
+	public VacancyModelCommands Commands => _commands;
+
+    public VacancyViewModel(HumanResourcesClient client)
+    {
+		_client = client;
+		_commands = new VacancyModelCommands(this);
+    }
+
+    public VacancyViewModel()
+    { }
 }

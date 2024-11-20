@@ -1,0 +1,96 @@
+﻿<Window x:Class="HumanResources.WPF.Views.Windows.AddCompanyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HumanResources.WPF.Views.Windows"
+        xmlns:vm="clr-namespace:HumanResources.WPF.ViewModels.Windows"
+        xmlns:v="clr-namespace:HumanResources.WPF.Views"
+        mc:Ignorable="d"
+        Title="CompanyWindow" 
+        Height="450" Width="700"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+
+    <Window.DataContext>
+        <vm:AddCompanyWindowViewModel/>
+    </Window.DataContext>
+    
+    <Border CornerRadius="35">
+        
+        <Border.Background>
+            <LinearGradientBrush EndPoint="-0.2,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF2E506F" Offset="0.1"/>
+                <GradientStop Color="#FF294661" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="125"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Style="{StaticResource TextBlockStyle}"
+                           Text="Company"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Foreground="White"
+                           FontSize="28"/>
+
+                <Border Background="#FF3E6588"
+                        CornerRadius="15"
+                        Height="60"
+                        Width="450"
+                        Grid.Row="1">
+
+                    <v:HintTextBox Height="60"
+                                   Width="425"
+                                   TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                   HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
+                                   Hint="Name"
+                                   Text="{Binding CompanyRequestDto.Name}"/>
+                </Border>
+
+            </Grid>
+            
+            
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Height="75"
+                        Width="225"
+                        Style="{StaticResource BackgroundButtonStyle}"
+                        Content="Cancel"
+                        Command="{Binding CancelCommand}"/>
+
+                <Button Height="75"
+                        Width="225"
+                        Style="{StaticResource BackgroundButtonStyle}"
+                        Content="Apply"
+                        Grid.Column="1"
+                        Command="{Binding ApplyCommand}"/>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+    
+</Window>

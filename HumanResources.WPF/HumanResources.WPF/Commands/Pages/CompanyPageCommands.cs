@@ -1,38 +1,41 @@
 ﻿using FlesLib.WPF.Commands;
-using HumanResources.Client.Shared.Parameters;
+using HumanResources.Core.Shared.Features;
 using HumanResources.WPF.Mappers;
 using HumanResources.WPF.ViewModels.Pages;
+using HumanResources.WPF.ViewModels.Windows;
 using HumanResources.WPF.Views.Models;
+using HumanResources.WPF.Views.Windows;
 
 namespace HumanResources.WPF.Commands.Pages;
 
 public class CompanyPageCommands : CommandsDictionary
 {
+    private PagingData _pagingData = new PagingData();
     public CompanyPageCommands(CompaniesPageViewModel viewModel)
     {
         var addCompanyCommand = new RelayCommand(c =>
         {
-
+            var addCompanyDialog = new AddCompanyWindow();
+            var addCompanyWindowContext = new AddCompanyWindowViewModel(viewModel.Client);
+            addCompanyDialog.DataContext = addCompanyWindowContext;
+            addCompanyDialog.ShowDialog();
         });
         AddCommand("Add", addCompanyCommand);
 
         var searchCommand = new RelayCommand(async c =>
         {
-            var parameters = new CompanyRequestParameters()
-            {
-                PageSize = 10,
-                PageNumber = viewModel.RequestParameters.PageNumber,
-                SearchTerm = viewModel.RequestParameters.SearchTerm,
-                OrederByQuery = viewModel.SortTypes[viewModel.SortType]
-            };
-            var companies = await viewModel.Client.Companies.GetAllAsync(parameters);
+            var companies = await viewModel.Client.Companies.GetAllAsync(viewModel.RequestParameters);
 
             viewModel.Companies = new List<CompanyView>(companies.ToView(viewModel.Client));
+            _pagingData = companies.PagingData;
         });
         AddCommand("Search", searchCommand);
 
         var nextPageCommand = new RelayCommand(c =>
         {
+            if (!_pagingData.HasNext)
+                return;
+
             viewModel.PageNumber += 1;
             searchCommand.Execute(null);
         });
@@ -40,6 +43,9 @@ public class CompanyPageCommands : CommandsDictionary
 
         var previousPageCommand = new RelayCommand(c =>
         {
+            if (!_pagingData.HasPrevious)
+                return;
+
             viewModel.PageNumber -= 1;
             searchCommand.Execute(null);
         });

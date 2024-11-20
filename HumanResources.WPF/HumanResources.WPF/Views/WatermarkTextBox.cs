@@ -45,7 +45,12 @@ public class WatermarkTextBox : TextBox
 
 	private void WatermarkTextBox_TextChanged(object sender, TextChangedEventArgs e)
 	{
-		if (!IsFocused)
+		if (IsFocused)
+		{
+			Foreground = _foreground;
+			HideWatermark();
+		}
+		else
 		{
 			ShowWatermark();
 		}

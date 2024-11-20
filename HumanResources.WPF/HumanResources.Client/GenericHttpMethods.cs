@@ -60,6 +60,17 @@ public class GenericHttpMethods
 		return responseObject;
 	}
 	
+	public async Task PostAsync(string uri, object obj)
+	{
+		var content = JsonContent.Create(obj);
+		var response = await _httpClient.PostAsync(uri, content);
+
+		if (response.StatusCode != HttpStatusCode.OK)
+		{
+			await HandleException(response);
+		}
+	}
+
 	public async Task DeleteAsync(string uri) =>
 		await _httpClient.DeleteAsync(uri);
 

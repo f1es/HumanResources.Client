@@ -1,5 +1,5 @@
 ﻿using HumanResources.Client;
-using HumanResources.Client.Shared.Dto.Response;
+using HumanResources.Core.Shared.Dto.Response;
 using HumanResources.WPF.ViewModels.Models;
 using HumanResources.WPF.Views.Models;
 

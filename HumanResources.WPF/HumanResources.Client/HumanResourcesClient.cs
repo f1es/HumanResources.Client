@@ -19,7 +19,7 @@ public class HumanResourcesClient
     public Workers Workers { get; private set; }
     public HumanResourcesClient()
     {
-        _url = "http://localhost:5001";
+        _url = "http://localhost:5001"; //5001
         _httpClient = new HttpClient();
         _genericHttpMethods = new GenericHttpMethods(_httpClient);
 		_endpoints = new Dictionary<Endpoint, string>() 
@@ -66,5 +66,12 @@ public class HumanResourcesClient
 		}
 
 		_httpClient.SetBearerToken(tokenResponse.AccessToken);
+	}
+
+    public async Task RegisterUserAsync(RegisterDto registerDto)
+    {
+        var registerEndpoint = "http://localhost:5000/api/accounts/register";
+
+        await _genericHttpMethods.PostAsync(registerEndpoint, registerDto);
 	}
 }

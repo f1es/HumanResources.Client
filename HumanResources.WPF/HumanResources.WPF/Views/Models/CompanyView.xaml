@@ -48,19 +48,22 @@
                     Style="{StaticResource ButtonLinkStyle}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Foreground="#FF2C87A5"/>
+                    Foreground="#FF2C87A5"
+                    Command="{Binding Commands[Departments]}"/>
 
             <Button Content="Vacancies" 
                     Grid.Column="3"
                     Style="{StaticResource ButtonLinkStyle}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Foreground="#FF2C87A5"/>
+                    Foreground="#FF2C87A5"
+                    Command="{Binding Commands[Vacancies]}"/>
 
             <Button Grid.Column="4"
                     Height="40"
                     Width="40"
-                    Style="{StaticResource TransparentButtonStyle}">
+                    Style="{StaticResource TransparentButtonStyle}"
+                    Command="{Binding Commands[Edit]}">
                 <Image Source="/Resources/Images/edit.png"/>
             </Button>
 

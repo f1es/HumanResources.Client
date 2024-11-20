@@ -1,7 +1,7 @@
 ﻿using FlesLib.WPF;
 using HumanResources.Client;
-using HumanResources.Client.Shared.Dto.Response;
-using HumanResources.Client.Shared.Parameters;
+using HumanResources.Core.Shared.Dto.Response;
+using HumanResources.Core.Shared.Parameters;
 using HumanResources.WPF.Commands.Pages;
 using HumanResources.WPF.Views.Models;
 
@@ -15,14 +15,15 @@ public class CompaniesPageViewModel : ObservableObject
     private CompanyRequestParameters _requestParameters = new CompanyRequestParameters() 
     { 
         PageNumber = 1,
+        PageSize = 10,
     };
 
 	private Dictionary<string, string> _sortTypes = new Dictionary<string, string>()
 	{
 		{ "Name A-Z", $"{nameof(CompanyResponseDto.Name)} asc" },
 		{ "Name Z-A", $"{nameof(CompanyResponseDto.Name)} desc" },
-		{ "Oldest", $"{nameof(CompanyResponseDto.BaseDate)} desc" },
-		{ "Newest", $"{nameof(CompanyResponseDto.BaseDate)} asc" },
+		{ "Oldest", $"{nameof(CompanyResponseDto.BaseDate)} asc" },
+		{ "Newest", $"{nameof(CompanyResponseDto.BaseDate)} desc" },
 	};
 	private string _sortType;
 
@@ -44,6 +45,7 @@ public class CompaniesPageViewModel : ObservableObject
         set
         {
             _sortType = value;
+            _requestParameters.OrederByQuery = _sortTypes[_sortType];
             OnPropertyChanged();
 			Commands["Search"].Execute(null);
 		}
@@ -67,11 +69,21 @@ public class CompaniesPageViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
+    public string SearchTerm
+    {
+        get => _requestParameters.SearchTerm;
+        set
+        {
+            _requestParameters.SearchTerm = value;
+            OnPropertyChanged();
+        }
+    }
     public CompaniesPageViewModel(HumanResourcesClient client)
     {
         _client = client;
         Commands = new CompanyPageCommands(this);
         _sortType = _sortTypes.First().Key;
+        _requestParameters.OrederByQuery = _sortTypes[_sortType];
 
         Commands["Search"].Execute(null);
     }

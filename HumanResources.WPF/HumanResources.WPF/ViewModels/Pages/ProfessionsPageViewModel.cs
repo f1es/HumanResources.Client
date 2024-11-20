@@ -1,7 +1,7 @@
 ﻿using FlesLib.WPF;
 using HumanResources.Client;
-using HumanResources.Client.Shared.Dto.Response;
-using HumanResources.Client.Shared.Parameters;
+using HumanResources.Core.Shared.Dto.Response;
+using HumanResources.Core.Shared.Parameters;
 using HumanResources.WPF.Commands.Pages;
 using HumanResources.WPF.Views.Models;
 
@@ -10,7 +10,6 @@ namespace HumanResources.WPF.ViewModels.Pages;
 public class ProfessionsPageViewModel : ObservableObject
 {
     private HumanResourcesClient _client;
-
     private List<ProfessionView> _professions = new List<ProfessionView>();
     private ProfessionRequestParameters _requestParameters = new ProfessionRequestParameters()
     {

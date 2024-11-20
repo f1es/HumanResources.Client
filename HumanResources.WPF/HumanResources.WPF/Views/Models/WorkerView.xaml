@@ -53,13 +53,15 @@
             <Button Grid.Column="4"
                      Height="40"
                      Width="40"
-                     Style="{StaticResource TransparentButtonStyle}">
+                     Style="{StaticResource TransparentButtonStyle}"
+                     Command="{Binding Commands[Edit]}">
                 <Image Source="/Resources/Images/edit.png"/>
             </Button>
 
             <Button Style="{StaticResource TransparentButtonStyle}"
                     Height="40" Width="40"
-                    Grid.Column="10">
+                    Grid.Column="10"
+                    Command="{Binding Commands[Delete]}">
                 <Image Source="/Resources/Images/delete.png"/>
             </Button>
 

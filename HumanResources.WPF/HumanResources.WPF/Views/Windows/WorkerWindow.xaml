@@ -1,0 +1,138 @@
+﻿<Window x:Class="HumanResources.WPF.Views.Windows.WorkerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:v="clr-namespace:HumanResources.WPF.Views"
+        xmlns:vm="clr-namespace:HumanResources.WPF.ViewModels.Windows"
+        xmlns:local="clr-namespace:HumanResources.WPF.Views.Windows"
+        mc:Ignorable="d"
+        Title="WorkerWindow" 
+        Height="550" Width="700"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+
+    <Window.DataContext>
+        <vm:WorkerWindowViewModel/>
+    </Window.DataContext>
+    
+    <Border CornerRadius="35">
+
+        <Border.Background>
+            <LinearGradientBrush EndPoint="-0.2,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF2E506F" Offset="0.1"/>
+                <GradientStop Color="#FF294661" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="125"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Style="{StaticResource TextBlockStyle}"
+                            Text="Worker"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Foreground="White"
+                            FontSize="28"/>
+
+                <Border Background="#FF3E6588"
+                         CornerRadius="15"
+                         Height="60"
+                         Width="450"
+                         Grid.Row="1">
+
+                    <v:HintTextBox Height="60"
+                            Width="425"
+                            TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                            HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
+                            Hint="First name"
+                            Text="{Binding WorkerRequestDto.FirstName}"/>
+                </Border>
+
+                <Border Background="#FF3E6588"
+                         CornerRadius="15"
+                         Height="60"
+                         Width="450"
+                         Grid.Row="2">
+
+                    <v:HintTextBox Height="60"
+                                Width="425"
+                                TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
+                                Hint="Last name"
+                                Text="{Binding WorkerRequestDto.LastName}"/>
+                </Border>
+
+                <Border Background="#FF3E6588"
+                         CornerRadius="15"
+                         Height="60"
+                         Width="450"
+                         Grid.Row="3">
+
+                    <v:HintTextBox Height="60"
+                                    Width="425"
+                                    TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                    HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
+                                    Hint="Phone"
+                                    Text="{Binding WorkerRequestDto.Phone}"/>
+                </Border>
+
+                <Border Background="#FF3E6588"
+                         CornerRadius="15"
+                         Height="60"
+                         Width="450"
+                         Grid.Row="4">
+
+                    <v:HintTextBox Height="60"
+                                    Width="425"
+                                    TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                    HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
+                                    Hint="Birthday"
+                                    Text="{Binding WorkerRequestDto.Birthday}"/>
+                </Border>
+
+            </Grid>
+
+
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Height="75"
+                         Width="225"
+                         Style="{StaticResource BackgroundButtonStyle}"
+                         Content="Cancel"
+                         Command="{Binding CancelCommand}"/>
+
+                <Button Height="75"
+                         Width="225"
+                         Style="{StaticResource BackgroundButtonStyle}"
+                         Content="Apply"
+                         Grid.Column="1"
+                         Command="{Binding ApplyCommand}"/>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+</Window>

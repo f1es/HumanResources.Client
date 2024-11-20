@@ -6,9 +6,14 @@
       xmlns:local="clr-namespace:HumanResources.WPF.Views.Pages"
       xmlns:vmod="clr-namespace:HumanResources.WPF.Views.Models"
       xmlns:v="clr-namespace:HumanResources.WPF.Views"
+      xmlns:vm="clr-namespace:HumanResources.WPF.ViewModels.Pages"
       mc:Ignorable="d"
       Title="VacanciesPageView">
 
+    <Page.DataContext>
+        <vm:VacanciesPageViewModel/>
+    </Page.DataContext>
+    
     <Grid Height="925" 
       Width="1600">
 
@@ -30,10 +35,10 @@
 
             <!--Search TextBox-->
             <Border Grid.Column="0" 
-        Background="#FF3E6588"
-        CornerRadius="20"
-        Height="50" Width="350"
-        VerticalAlignment="Top">
+                    Background="#FF3E6588"
+                    CornerRadius="20"
+                    Height="50" Width="350"
+                    VerticalAlignment="Top">
 
                 <Grid>
 
@@ -42,15 +47,19 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <v:WatermarkTextBox Style="{StaticResource SearchTextBoxStyle}"
-                                         Height="50" Width="290"
-                                         HorizontalAlignment="Right"/>
+                    <v:HintTextBox Hint="Search"
+                                   TextBoxStyle="{StaticResource HintTextBoxStyle}"
+                                   HintTextBlockStyle="{StaticResource HintTextBlockStyle}"
+                                   Height="50" Width="290"
+                                   HorizontalAlignment="Right"
+                                   Text="{Binding RequestParameters.SearchTerm}"/>
 
                     <Button Grid.Column="1"
-                Style="{StaticResource TransparentButtonStyle}">
+                            Style="{StaticResource TransparentButtonStyle}"
+                            Command="{Binding Commands[Search]}">
                         <Image Source="/Resources/Images/search.png"
-                   Height="30"
-                   Width="30"/>
+                               Height="30"
+                               Width="30"/>
                     </Button>
 
 
@@ -61,38 +70,35 @@
 
             <!--Sort Combobox-->
             <Border Background="#FF3E6588"
-        Grid.Column="1"
-        CornerRadius="20"
-        Height="50"
-        VerticalAlignment="Top">
+                    Grid.Column="1"
+                    CornerRadius="20"
+                    Height="50"
+                    VerticalAlignment="Top">    
 
                 <ComboBox Height="35"
-              Width="220"
-              Grid.Column="1"
-              Style="{StaticResource ComboBoxFlatStyle}"
-              Background="Transparent"
-              BorderThickness="0">
-                    <ComboBox.Items>
-                        <ComboBoxItem Content="Name A-Z"
-                          IsSelected="True"/>
-                        <ComboBoxItem Content="Name Z-A" />
-                        <ComboBoxItem Content="Oldest" />
-                        <ComboBoxItem Content="Newest" />
-                    </ComboBox.Items>
+                          Width="220"
+                          Grid.Column="1"
+                          Style="{StaticResource ComboBoxFlatStyle}"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          ItemsSource="{Binding SortTypes.Keys}"
+                          SelectedItem="{Binding SortType}">
+           
                 </ComboBox>
             </Border>
 
             <Button Grid.Column="2"
-                Height="50"
-                Width="50"
-                Background="#FF3E6588"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Style="{StaticResource ColoredButtonStyle}"
-                Content="+"
-                FontSize="35"
-                VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center"/>
+                    Height="50"
+                    Width="50"
+                    Background="#FF3E6588"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource ColoredButtonStyle}"
+                    Content="+"
+                    FontSize="35"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding Commands[Add]}"/>
 
         </Grid>
 
@@ -110,18 +116,10 @@
                   HorizontalAlignment="Center"
                   Margin="0,0,0,0"
                   Style="{StaticResource MainWindowListViewStyle}"
-                  ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}">
+                  ItemContainerStyle="{StaticResource ListViewItemWithoutBackgroundStyle}"
+                  ItemsSource="{Binding Vacancies}">
 
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
-                <vmod:VacancyView/>
+                <!--<vmod:VacancyView/>-->
 
             </ListView>
 
@@ -130,10 +128,10 @@
 
 
         <Grid VerticalAlignment="Bottom"
-  HorizontalAlignment="Center"
-  Margin="25,15,0,35"
-  Width="175"
-  Grid.Row="1">
+              HorizontalAlignment="Center"
+              Margin="25,15,0,35"
+              Width="175"
+              Grid.Row="1">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
@@ -143,16 +141,18 @@
 
             <Viewbox Style="{StaticResource ArrowViewboxStyle}">
                 <Button Height="40" Width="40"
-                    Content="&lt;"
-                    Style="{StaticResource ArrowButtonStyle}"/>
+                        Content="&lt;"
+                        Style="{StaticResource ArrowButtonStyle}"
+                        Command="{Binding Commands[PreviousPage]}"/>
             </Viewbox>
 
             <TextBlock Style="{StaticResource TextBlockStyle}"
                    Grid.Column="1"
                    Foreground="White"
                    HorizontalAlignment="Center"
-                   Height="25">
-                1
+                   Height="25"
+                   Text="{Binding PageNumber}">
+                
             </TextBlock>
 
 
@@ -160,7 +160,8 @@
                 Grid.Column="2">
                 <Button Height="40" Width="40"
                     Content="&gt;"
-                    Style="{StaticResource ArrowButtonStyle}"/>
+                    Style="{StaticResource ArrowButtonStyle}"
+                    Command="{Binding Commands[NextPage]}"/>
             </Viewbox>
 
 

@@ -18,7 +18,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="950"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
@@ -26,15 +26,17 @@
 
             <TextBlock Text="{Binding Vacancy.Description}"
                        Style="{StaticResource TextBlockStyle}"
-                       HorizontalAlignment="Center"
+                       HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Grid.Column="0"/>
+                       Grid.Column="0"
+                       Margin="25,0,0,0"/>
 
-            <WrapPanel HorizontalAlignment="Center"
+            <WrapPanel HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Grid.Column="1">
+                       Grid.Column="1"
+                       Margin="25,0,0,0">
 
-                <TextBlock Text="Receipt date - "
+                <TextBlock Text=""
                            Style="{StaticResource TextBlockStyle}"/>
 
                 <TextBlock Text="{Binding Vacancy.ReceiptDate}"
@@ -48,13 +50,15 @@
             <Button Grid.Column="2"
                      Height="40"
                      Width="40"
-                     Style="{StaticResource TransparentButtonStyle}">
+                     Style="{StaticResource TransparentButtonStyle}"
+                     Command="{Binding Commands[Edit]}">
                 <Image Source="/Resources/Images/edit.png"/>
             </Button>
 
             <Button Style="{StaticResource TransparentButtonStyle}"
                     Height="40" Width="40"
-                    Grid.Column="10">
+                    Grid.Column="10"
+                    Command="{Binding Commands[Delete]}">
                 <Image Source="/Resources/Images/delete.png"/>
             </Button>
 
