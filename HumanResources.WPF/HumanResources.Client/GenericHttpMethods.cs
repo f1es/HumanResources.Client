@@ -18,7 +18,7 @@ public class GenericHttpMethods
 	{
 		var response = await _httpClient.GetAsync(uri);
 
-		if (response.StatusCode != HttpStatusCode.OK)
+		if (!response.IsSuccessStatusCode)
 		{
 			await HandleException(response);
 		}
@@ -31,7 +31,7 @@ public class GenericHttpMethods
 	{
 		var response = await _httpClient.GetAsync(uri);
 
-		if (response.StatusCode != HttpStatusCode.OK)
+		if (!response.IsSuccessStatusCode)
 		{
 			await HandleException(response);
 		}
@@ -51,7 +51,7 @@ public class GenericHttpMethods
 		var content = JsonContent.Create(obj);
 		var response = await _httpClient.PostAsync(uri, content);
 
-		if (response.StatusCode != HttpStatusCode.OK)
+		if (!response.IsSuccessStatusCode)
 		{
 			await HandleException(response);
 		}
@@ -65,7 +65,7 @@ public class GenericHttpMethods
 		var content = JsonContent.Create(obj);
 		var response = await _httpClient.PostAsync(uri, content);
 
-		if (response.StatusCode != HttpStatusCode.OK)
+		if (!response.IsSuccessStatusCode)
 		{
 			await HandleException(response);
 		}
