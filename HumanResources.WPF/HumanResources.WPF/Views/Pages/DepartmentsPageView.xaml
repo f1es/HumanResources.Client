@@ -55,7 +55,8 @@
                                    Text="{Binding RequestParameters.SearchTerm}"/>
 
                     <Button Grid.Column="1"
-                            Style="{StaticResource TransparentButtonStyle}">
+                            Style="{StaticResource TransparentButtonStyle}"
+                            Command="{Binding Commands[Search]}">
                         <Image Source="/Resources/Images/search.png"
                            Height="30"
                            Width="30"/>
